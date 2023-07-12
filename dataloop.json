@@ -21,7 +21,7 @@
             {
                 "invoke": {
                     "type": "function",
-                    "namespace": "scoring_functions.create_consensus_item_score"
+                    "namespace": "scoring_functions.create_task_item_score"
                 },
                 "categories": [
                     "data"
@@ -39,7 +39,7 @@
                 },
                 "functions": [
                     {
-                        "name": "create_consensus_item_score",
+                        "name": "create_task_item_score",
                         "description": "Calculate the consensus score for each item with consensus",
                         "input": [
                             {

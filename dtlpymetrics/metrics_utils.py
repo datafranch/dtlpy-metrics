@@ -23,6 +23,13 @@ def mean_or_nan(arr):
         return np.mean(arr)
 
 
+def mean_or_default(arr, default):
+    if isinstance(arr, list) and len(arr) == 0:
+        return default
+    else:
+        return np.mean(arr)
+
+
 def measure_annotations(
         annotations_set_one: Union[entities.AnnotationCollection, list],
         annotations_set_two: Union[entities.AnnotationCollection, list],
