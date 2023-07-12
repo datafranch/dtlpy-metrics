@@ -165,7 +165,7 @@ def create_task_item_score(item: dl.Item,
                                                                 if score.entity_id == annotation.id],
                                                            default=1)
                 # ANNOTATION_OVERALL
-                user_confusion.append(single_annotation_scores)
+                user_annotation_overalls.append(single_annotation_scores)
                 annotation_overall = Score(type=ScoreType.ANNOTATION_OVERALL.value,
                                            value=single_annotation_scores,
                                            entity_id=annotation.id,
