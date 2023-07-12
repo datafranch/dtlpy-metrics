@@ -40,7 +40,7 @@
                 "functions": [
                     {
                         "name": "create_task_item_score",
-                        "description": "Calculate the consensus score for each item with consensus",
+                        "description": "Calculate the score for each item with in a task (consensus, qualification, honeypot)",
                         "input": [
                             {
                                 "type": "Item",
