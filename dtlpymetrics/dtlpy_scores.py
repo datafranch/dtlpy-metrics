@@ -11,7 +11,7 @@ class ScoreType(Enum):
     ANNOTATION_ATTRIBUTE = 'annotation_attribute'
     ANNOTATION_OVERALL = 'annotation_overall'
     ITEM_OVERALL = 'item_overall'
-    USER_OVERALL = 'user_overall'
+    USER_CONFUSION = 'user_confusion'
     LABEL_CONFUSION = 'label_confusion'
 
 
