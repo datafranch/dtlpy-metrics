@@ -5,7 +5,7 @@ from dtlpy import exceptions, entities, miscellaneous, _api_reference, repositor
 from dtlpy.services.api_client import ApiClient
 
 
-class ScoreType(Enum):
+class ScoreType(str, Enum):
     ANNOTATION_IOU = 'annotation_iou'
     ANNOTATION_LABEL = 'annotation_label'
     ANNOTATION_ATTRIBUTE = 'annotation_attribute'
@@ -13,6 +13,9 @@ class ScoreType(Enum):
     ITEM_OVERALL = 'item_overall'
     USER_CONFUSION = 'user_confusion'
     LABEL_CONFUSION = 'label_confusion'
+
+    def __str__(self) -> str:
+        return str.__str__(self)
 
 
 class Score(entities.DlEntity):
@@ -184,7 +187,7 @@ def tests():
     task = dl.tasks.get(task_id='63bffffa8cac97275a31fd17')
     annotation = dl.annotations.get(annotation_id='6499302b6563931044046cbc')
 
-    score = Score(type=ScoreType.ANNOTATION_IOU.value,
+    score = Score(type=ScoreType.ANNOTATION_IOU,
                   value=0.9,
                   entity_id=annotation.id,
                   task_id=task.id)
@@ -202,4 +205,3 @@ def tests():
 
 if __name__ == '__main__':
     tests()
-

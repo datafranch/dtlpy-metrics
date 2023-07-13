@@ -4,7 +4,7 @@ import dtlpy as dl
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from dtlpymetrics.scoring import calculate_task_score
+from dtlpymetrics.scoring import calculate_task_score, create_task_item_score
 from dtlpymetrics.dtlpy_scores import Score, Scores, ScoreType
 import logging
 
@@ -60,9 +60,10 @@ if __name__ == '__main__':
     # item = dl.items.get(item_id='64a9b634a1198616d9dfc1bd')
     # task = dl.tasks.get(task_id='64a9b62e465fd3a73ef9f3fd')
 
-    item = dl.items.get(item_id='64aa74df3dbc45b7f282886d')
-    task = dl.tasks.get(task_id='64aa776da54a2acafd368370')  # guy's task
+    item = dl.items.get(item_id='64aa74e3d99c9b255e3ced3b')
+    task = dl.tasks.get(task_id='64af242642cb1c6671e74b52')  # guy's task
 
-    consensus_item = calculate_task_score(task=task)
+    # consensus_item = calculate_task_score(task=task)
+    create_task_item_score(task=task, item=item)
 
     print()

@@ -8,6 +8,7 @@ from typing import List
 from dtlpymetrics.metrics_utils import measure_annotations, all_compare_types, mean_or_default
 from dtlpymetrics.dtlpy_scores import Score, Scores, ScoreType
 
+dl.use_attributes_2()
 results_columns = {'annotation_iou': 'geometry_score',
                    'annotation_label': 'label_score',
                    'annotation_attribute': 'attribute_score',
@@ -159,14 +160,14 @@ def create_task_item_score(item: dl.Item,
             # calc annotation_overall
             user_annotation_overalls = list()
 
-            for annotation in annot_collection_1:
+            for annotation in annot_collection_2:  # go over all annotations from the "test" set
                 single_annotation_scores = mean_or_default(arr=[score.value
                                                                 for score in raw_annotation_scores
                                                                 if score.entity_id == annotation.id],
                                                            default=1)
                 # ANNOTATION_OVERALL
                 user_annotation_overalls.append(single_annotation_scores)
-                annotation_overall = Score(type=ScoreType.ANNOTATION_OVERALL.value,
+                annotation_overall = Score(type=ScoreType.ANNOTATION_OVERALL,
                                            value=single_annotation_scores,
                                            entity_id=annotation.id,
                                            task_id=task.id,
@@ -175,7 +176,7 @@ def create_task_item_score(item: dl.Item,
                                            dataset_id=item.dataset.id)
                 all_scores.append(annotation_overall)
 
-            user_confusion_score = Score(type=ScoreType.USER_CONFUSION.value,
+            user_confusion_score = Score(type=ScoreType.USER_CONFUSION,
                                          value=mean_or_default(arr=user_annotation_overalls,
                                                                default=1),
                                          entity_id=assignment_annotator_j,
@@ -189,7 +190,7 @@ def create_task_item_score(item: dl.Item,
 
     for label_a, rest in confusion_by_label.items():
         for label_b, value in rest.items():
-            item_score = Score(type=ScoreType.LABEL_CONFUSION.value,
+            item_score = Score(type=ScoreType.LABEL_CONFUSION,
                                value=value,
                                entity_id=label_a,
                                relative=label_b,
@@ -197,8 +198,8 @@ def create_task_item_score(item: dl.Item,
                                item_id=item.id,
                                dataset_id=item.dataset.id)
             all_scores.append(item_score)
-    item_overall = [score.value for score in all_scores if score.type == ScoreType.ANNOTATION_OVERALL]
-    item_score = Score(type=ScoreType.ITEM_OVERALL.value,
+    item_overall = [score.value for score in all_scores if score.type == ScoreType.ANNOTATION_OVERALL.value]
+    item_score = Score(type=ScoreType.ITEM_OVERALL,
                        value=mean_or_default(arr=item_overall, default=1),
                        entity_id=item.id,
                        task_id=task.id,
@@ -378,7 +379,7 @@ def calculate_annotation_scores(annot_collection_1,
             if row['second_id'] is None:
                 continue
 
-            annot_score = Score(type=score_type.value,
+            annot_score = Score(type=score_type,
                                 value=row[results_columns[score_type.value.lower()]],
                                 entity_id=row['second_id'],
                                 relative=row['first_id'])
@@ -398,7 +399,7 @@ def calculate_annotation_scores(annot_collection_1,
             name='counts')
 
         for i, row in label_confusion_summary.iterrows():
-            confusion_score = Score(type=ScoreType.LABEL_CONFUSION.value,
+            confusion_score = Score(type=ScoreType.LABEL_CONFUSION,
                                     value=row['counts'],
                                     entity_id=row['first_label'],
                                     relative=row['second_label'])
