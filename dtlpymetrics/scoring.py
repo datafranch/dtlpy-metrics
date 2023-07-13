@@ -128,7 +128,7 @@ def create_task_item_score(item: dl.Item,
             if i_assignment == j_assignment:
                 continue
             # skip ref in inner loop
-            if assignment_annotator_i == 'ref':
+            if assignment_annotator_j == 'ref':
                 continue
             logger.info(
                 f'Comparing assignee: {assignment_annotator_i!r} with assignee: {assignment_annotator_j!r}')

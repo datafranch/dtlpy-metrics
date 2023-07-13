@@ -60,8 +60,13 @@ if __name__ == '__main__':
     # item = dl.items.get(item_id='64a9b634a1198616d9dfc1bd')
     # task = dl.tasks.get(task_id='64a9b62e465fd3a73ef9f3fd')
 
-    item = dl.items.get(item_id='64aa74e3d99c9b255e3ced3b')
-    task = dl.tasks.get(task_id='64af242642cb1c6671e74b52')  # guy's task
+    # consensus
+    # item = dl.items.get(item_id='64aa74e3d99c9b255e3ced3b')
+    # task = dl.tasks.get(task_id='64af242642cb1c6671e74b52')  # guy's task
+
+    # qualification
+    item = dl.items.get(item_id='64af4e6ab0095cf6b2e144f3')
+    task = dl.tasks.get(task_id='64af4e686ddcb36a188c6fd2')  # guy's task
 
     # consensus_item = calculate_task_score(task=task)
     create_task_item_score(task=task, item=item)
